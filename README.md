@@ -1,1 +1,1 @@
-Evaluation of messaging library performance using publish-subscribe-model. Systems under evaluation are ZeroMQ, JeroMQ, Nanomsg and Netty.
+Java code for evaluation of high performance messaging libraries like JeroMQ and Netty. Contains code for simulators, test setups and analysis of results.
