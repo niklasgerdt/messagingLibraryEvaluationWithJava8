@@ -1,46 +1,41 @@
 package eu.route20.hft.simulation;
 
-import static org.junit.Assert.assertEquals;
-import java.util.ArrayList;
-import java.util.List;
-import lombok.val;
+import static org.junit.Assert.*;
+import lombok.*;
 import org.junit.*;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+import org.mockito.*;
+import eu.route20.hft.events.*;
 import eu.route20.hft.publisher.*;
-import eu.route20.hft.simulation.Simulator;
 
 public class SimulatorTest {
 	@InjectMocks private Simulator simulator;
 	@Mock private Publisher pub;
-	private List<byte[]> notifications;
+	@Mock private EventStore eventStore;
 
 	@Before public void setup() {
-		simulator = new Simulator();
+		simulator = new Simulator(eventStore, pub);
 		MockitoAnnotations.initMocks(this);
 	}
 
-	@Test public void sendsNotificationToPublisher() throws InterruptedException {
-		simulator.setNotifications(10);
-		simulator.doSimulation();
-		Mockito.verify(pub, Mockito.times(10)).pub(Mockito.any());
+	@Test public void sendsNotificationToPublisher() {
+		simulator.setMsgLimit(10);
+		simulator.run();
+		Mockito.verify(pub, Mockito.atLeast(1))
+				.pub(Mockito.any());
 	}
 
 	@Test public void sendsRightAmountOfNotifications() throws InterruptedException {
-		simulator.setNotifications(1000);
-		simulator.doSimulation();
-		Mockito.verify(pub, Mockito.times(1000)).pub(Mockito.any());
+		simulator.setMsgLimit(10);
+		simulator.run();
+		Mockito.verify(pub, Mockito.times(10))
+				.pub(Mockito.any());
 	}
 
 	@Ignore @Test public void pausesBetweenNotification() throws InterruptedException {
 		int pauseInMillis = 100;
-		simulator.setPauseInMillisBetweenNotifications(pauseInMillis);
-		simulator.setPauseInNanosBetweenNotifications(1);
-		simulator.setNotifications(2);
+		simulator.setNanoPause(1);
 		val t1 = System.currentTimeMillis();
-		simulator.doSimulation();
+		// simulator.doSimulation();
 		val t2 = System.currentTimeMillis();
 		assertEquals(2 * pauseInMillis, t2 - t1, 2 * (pauseInMillis / 10));
 	}

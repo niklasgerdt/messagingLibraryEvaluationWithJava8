@@ -17,29 +17,26 @@ import eu.route20.hft.simulation.*;
 
 	@Bean public List<Simulator> simulators() {
 		List<Simulator> simulatorList = new ArrayList<>();
-		
+
 		Simulator quoteSimulator = (Simulator) ctx.getBean("simulator");
-		quoteSimulator.setNotificationLengthInBytes(HUNDRED);
-		quoteSimulator.setNotifications(MILLION);
-		quoteSimulator.setPauseInNanosBetweenNotifications(1);
+		quoteSimulator.setMsgLen(HUNDRED);
+		quoteSimulator.setNanoPause(1);
 		logger.info("created quotesimulator");
-		
+
 		Simulator newsSimulator = (Simulator) ctx.getBean("simulator");
-		newsSimulator.setNotificationLengthInBytes(HUNDREDTHOUSAND);
-		newsSimulator.setNotifications(THOUSAND);
+		newsSimulator.setMsgLen(HUNDREDTHOUSAND);
 		logger.info("created newssimulator");
-		
+
 		Simulator someSimulator = (Simulator) ctx.getBean("simulator");
-		someSimulator.setNotificationLengthInBytes(THOUSAND);
-		someSimulator.setNotifications(THOUSAND);
+		someSimulator.setMsgLen(THOUSAND);
 		logger.info("created somesimulator");
-		
+
 		simulatorList.add(quoteSimulator);
-//		simulatorList.add(newsSimulator);
-//		simulatorList.add(someSimulator);
+		// simulatorList.add(newsSimulator);
+		// simulatorList.add(someSimulator);
 		logger.info("Simulator container id {}.", simulatorList.toString());
-		
+
 		return simulatorList;
 	}
-	
+
 }

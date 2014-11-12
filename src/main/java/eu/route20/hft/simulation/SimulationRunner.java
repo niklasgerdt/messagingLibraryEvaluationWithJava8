@@ -14,7 +14,7 @@ import org.springframework.stereotype.*;
 	public void run() {
 		logger.info("Starting simulation with {} simulators.", simulators.size());
 		logger.info("Simulator container id {}.", simulators.toString());
-		simulators.stream().parallel().forEach(s -> s.doSimulation());
+//		simulators.stream().parallel().forEach(s -> s.doSimulation());
 		logger.info("Notifications simulated.");
 	}
 

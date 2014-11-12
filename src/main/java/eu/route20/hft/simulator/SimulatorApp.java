@@ -11,7 +11,7 @@ import eu.route20.hft.simulation.config.*;
 
 public class SimulatorApp {
 
-	public static void main(String[] args) throws ClassNotFoundException {
+	public static void main(String[] args) {
 		logbackStatus();
 		run(args[0]);
 		stopLogging();
@@ -23,7 +23,6 @@ public class SimulatorApp {
 		val runner = (SimulationRunner) ctx.getBean("simulationRunner");
 		@SuppressWarnings("unchecked") val simulators = (List<Simulator>) ctx.getBean("simulators");
 		runner.setSimulators(simulators);
-
 		runner.run();
 		runner.report();
 

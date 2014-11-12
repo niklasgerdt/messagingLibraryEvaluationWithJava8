@@ -13,9 +13,9 @@ import route20.hft.annotations.*;
 	@Getter private long lastMsgTs;
 	@Getter private long messages;
 
-	@Override public void pub(byte[] notification) {
+	@Override public void pub(String notification) {
 		synchronized (notification) {
-			logger.trace("Received notification, length {} bytes.", notification.length);
+			logger.trace("Received notification, length {} bytes.", notification);
 			lastMsgTs = System.currentTimeMillis();
 			if (firstMsgTs == 0)
 				firstMsgTs = lastMsgTs;

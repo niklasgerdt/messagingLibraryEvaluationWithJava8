@@ -5,3 +5,9 @@ pom.xml.versionsBackup
 pom.xml.next
 release.properties
 logs/
+*.iml
+.idea/
+.project
+.settings/
+.classpath
+*.log

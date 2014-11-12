@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<simulator id="A">
+	<publisher>JEROMQ</publisher>
+	<address>tcp://168.1.1.1:5001</address>
+	<pause>100</pause>
+	<messageLength>100</messageLength>
+</simulator>
+<simulator id="B">
+	<publisher>JEROMQ</publisher>
+	<address>tcp://168.1.1.1:5001</address>
+	<pause>100</pause>
+	<messageLength>100</messageLength>
+</simulator>
+<simulator id="C">
+	<publisher>JEROMQ</publisher>
+	<address>tcp://168.1.1.1:5001</address>
+	<pause>100</pause>
+	<messageLength>100</messageLength>
+</simulator>
+<simulator id="D">
+	<publisher>JEROMQ</publisher>s
+	<address>tcp://168.1.1.1:5001</address>
+	<pause>100</pause>
+	<messageLength>100</messageLength>
+</simulator>
+
