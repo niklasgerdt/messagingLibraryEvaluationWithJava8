@@ -18,7 +18,7 @@ public class EventSupplier<T> implements Supplier<Optional<Message>> {
 	}
 
 	@Override public Optional<Message> get() {
-		Message msg = null;
+		Message msg = null	;
 		if (Kill.killed())
 			return Optional.empty();
 		else
