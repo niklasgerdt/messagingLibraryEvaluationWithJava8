@@ -5,7 +5,8 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context
 			http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<context:property-placeholder location="basic_simulation.properties, jdbc.properties" />
+	<context:property-placeholder
+		location="basic_simulation.properties, jdbc.properties" />
 
 	<bean id="networkContext" class="mom.JeroMqNetworkContext"></bean>
 
@@ -35,13 +36,13 @@
 		${eventlength" c:pauser-ref="pauser"></bean>
 
 	<bean id="publisher1" class="mom.publisher.JeroMqPublisher"
-		c:address="${publisher.address1}" />
+		c:networkContext-ref="networkContext" c:address="${publisher.address1}" />
 	<bean id="publisher2" class="mom.publisher.JeroMqPublisher"
-		c:address="${publisher.address2}" />
+		c:networkContext-ref="networkContext" c:address="${publisher.address2}" />
 	<bean id="publisher3" class="mom.publisher.JeroMqPublisher"
-		c:address="${publisher.address3}" />
+		c:networkContext-ref="networkContext" c:address="${publisher.address3}" />
 	<bean id="publisher4" class="mom.publisher.JeroMqPublisher"
-		c:address="${publisher.address4}" />
+		c:networkContext-ref="networkContext" c:address="${publisher.address4}" />
 
 	<bean id="simulator1" class="mom.Simulator" c:eventSource-ref="eventsource1"
 		c:publisher-ref="publisher1"></bean>
@@ -53,13 +54,13 @@
 		c:publisher-ref="publisher4"></bean>
 
 	<bean id="subscriber1" class="mom.subscriber.JeroMqSubscriber"
-		c:address="${subscriber.address1}" />
+		c:networkContext-ref="networkContext" c:address="${subscriber.address1}" />
 	<bean id="subscriber2" class="mom.subscriber.JeroMqSubscriber"
-		c:address="${subscriber.address2}" />
+		c:networkContext-ref="networkContext" c:address="${subscriber.address2}" />
 	<bean id="subscriber3" class="mom.subscriber.JeroMqSubscriber"
-		c:address="${subscriber.address3}" />
+		c:networkContext-ref="networkContext" c:address="${subscriber.address3}" />
 	<bean id="subscriber4" class="mom.subscriber.JeroMqSubscriber"
-		c:address="${subscriber.address4}" />
+		c:networkContext-ref="networkContext" c:address="${subscriber.address4}" />
 
 	<bean id="listener1" class="mom.simulation.Listener"
 		c:eventDao-ref="eventDao" c:eventLimit="${eventlimit}"
