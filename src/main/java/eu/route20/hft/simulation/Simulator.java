@@ -3,6 +3,7 @@ package eu.route20.hft.simulation;
 import java.util.*;
 import java.util.stream.*;
 import lombok.*;
+import mom.event.Event;
 import org.slf4j.*;
 import eu.route20.hft.events.*;
 import eu.route20.hft.publisher.*;
@@ -31,20 +32,20 @@ public class Simulator implements Runnable {
 
 	@Override public void run() {
 		logger.debug("Simulating notifications of {} bytes with pause {}.", msgLen, nanoPause);
-		List<Optional<Message>> optionalEvents = Stream.generate(() -> createMessage())
+		List<Optional<Event>> optionalEvents = Stream.generate(() -> createMessage())
 				.peek(x -> pause())
 				.filter(msg -> msg.isPresent())
 				.peek(msg -> publisher.pub(msg.toString()))
 				.limit(msgLimit)
 				.collect(Collectors.toList());
-		List<Message> events = optionalEvents.stream()
+		List<Event> events = optionalEvents.stream()
 				.map(x -> x.get())
 				.collect(Collectors.toList());
 		eventStore.flush(events);
 	}
 
-	private Optional<Message> createMessage() {
-		Message msg = new Message.Builder(message, id).build();
+	private Optional<Event> createMessage() {
+		Event msg = new Event.Builder(message, id).build();
 		if (Kill.killed())
 			return Optional.empty();
 		else

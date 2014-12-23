@@ -11,31 +11,32 @@ import eu.route20.hft.simulation.config.*;
 
 public class SimulatorApp {
 
-	public static void main(String[] args) {
-		logbackStatus();
-		run(args[0]);
-		stopLogging();
-	}
+    public static void main(String[] args) {
+        logbackStatus();
+        run(args[0]);
+        stopLogging();
+    }
 
-	private static void run(String profile) {
-		System.setProperty("spring.profiles.active", profile);
-		val ctx = new AnnotationConfigApplicationContext(Config.class);
-		val runner = (SimulationRunner) ctx.getBean("simulationRunner");
-		@SuppressWarnings("unchecked") val simulators = (List<Simulator>) ctx.getBean("simulators");
-		runner.setSimulators(simulators);
-		runner.run();
-		runner.report();
+    private static void run(String profile) {
+        System.setProperty("spring.profiles.active", profile);
+        val ctx = new AnnotationConfigApplicationContext(Config.class);
+        val runner = (SimulationRunner) ctx.getBean("simulationRunner");
+        @SuppressWarnings("unchecked")
+        val simulators = (List<Simulator>) ctx.getBean("simulators");
+        runner.setSimulators(simulators);
+        runner.run();
+        runner.report();
 
-		ctx.close();
-	}
+        ctx.close();
+    }
 
-	private static void stopLogging() {
-		LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
-		loggerContext.stop();
-	}
+    private static void stopLogging() {
+        LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
+        loggerContext.stop();
+    }
 
-	private static void logbackStatus() {
-		LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
-		StatusPrinter.print(lc);
-	}
+    private static void logbackStatus() {
+        LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
+        StatusPrinter.print(lc);
+    }
 }

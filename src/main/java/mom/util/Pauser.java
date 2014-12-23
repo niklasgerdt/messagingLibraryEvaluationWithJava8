@@ -1,4 +1,4 @@
-package eu.route20.hft.simulation;
+package mom.util;
 
 public class Pauser {
     private final long nanoPause;

@@ -1,0 +1,5 @@
+for mysql
+
+create schema hft;
+create table events(sender int, receiver int, created bigint, routed bigint);
+create user hft identified by 'hft';
