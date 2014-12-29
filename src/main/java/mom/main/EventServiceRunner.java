@@ -12,6 +12,7 @@ import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class EventServiceRunner {
+    private static final String EVENT_SERVICE_CONTEXT_XML = "EventServiceContext.xml";
     final static Logger logger = LoggerFactory.getLogger(EventServiceRunner.class);
 
     public static void main(String[] args) {
@@ -25,7 +26,7 @@ public class EventServiceRunner {
 
     private static ApplicationContext handleContext() {
         // System.setProperty("spring.profiles.active", "");
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("EventServiceContext.xml");
+        ApplicationContext ctx = new ClassPathXmlApplicationContext(EVENT_SERVICE_CONTEXT_XML);
         ((AbstractApplicationContext) ctx).registerShutdownHook();
         return ctx;
     }

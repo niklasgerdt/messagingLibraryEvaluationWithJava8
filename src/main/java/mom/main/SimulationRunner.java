@@ -14,8 +14,6 @@ public class SimulationRunner {
     public static void main(String[] args) {
         Logging.logbackStatus();
         logger.info("starting simulation");
-
-        // System.setProperty("spring.profiles.active", "");
         @SuppressWarnings("resource")
         ApplicationContext ctx = new ClassPathXmlApplicationContext("ApplicationContext.xml");
         ((AbstractApplicationContext) ctx).registerShutdownHook();

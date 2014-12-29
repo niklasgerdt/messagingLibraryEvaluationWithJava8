@@ -1,4 +1,4 @@
-package mom.subscriber;
+package moma.subscriber;
 
 import mom.net.JeroMqNetworkContext;
 import org.slf4j.Logger;

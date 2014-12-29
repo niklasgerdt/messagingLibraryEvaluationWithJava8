@@ -1,8 +1,8 @@
-package mom.util;
+package moma.util;
 
 import java.io.IOException;
-import mom.event.Event;
-import mom.publisher.Publisher;
+import moma.event.Event;
+import moma.publisher.Publisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +12,8 @@ import org.springframework.stereotype.Component;
 public class KillSwitch implements Runnable {
     final static Logger logger = LoggerFactory.getLogger(KillSwitch.class);
     private volatile boolean set = false;
-    private final Publisher publisher;
-
     @Autowired
-    public KillSwitch(Publisher publisher) {
-        this.publisher = publisher;
-    }
+    private Publisher publisher;
 
     public void waitForKill() {
         System.out.println("press any key to stop event service...");

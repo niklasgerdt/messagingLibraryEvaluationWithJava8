@@ -1,4 +1,4 @@
-package mom.event;
+package moma.event;
 
 import lombok.*;
 

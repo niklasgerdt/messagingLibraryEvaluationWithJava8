@@ -17,11 +17,10 @@ public class Simulation {
     }
 
     public void run() {
-        logger.info("starting simulation with simulators (%s) and listeners (%s)", simulators, listeners);
+        logger.info("starting simulation with simulators {} and listeners {}", simulators, listeners);
         ExecutorService listenerSpawner = Executors.newFixedThreadPool(listeners.size());
         listeners.forEach(s -> listenerSpawner.execute(s));
-        ExecutorService simulatorSpawner = Executors.newFixedThreadPool(simulators.size());
-        simulators.forEach(s -> simulatorSpawner.execute(s));
+        simulators.stream().parallel().forEach(s -> s.run());
         logger.info("forked simulators and listeners");
     }
 }

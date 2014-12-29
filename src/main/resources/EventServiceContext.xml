@@ -5,28 +5,30 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context
 			http://www.springframework.org/schema/context/spring-context.xsd">
 
+	<context:property-placeholder location="basic_simulation.properties" />
+
 	<bean id="networkContext" class="mom.net.JeroMqNetworkContext"></bean>
 
 	<bean id="publisher" class="mom.publisher.JeroMqPublisher"
-		c:networkContext-ref="networkContext" c:address="tcp://169.1.1.1" />
+		c:networkContext-ref="networkContext" c:address="${eventservice.jero.kill.publisher}"
+		init-method="afterPropertiesSet" />
 
 	<bean id="killSwitch" class="mom.util.KillSwitch" c:publisher-ref="publisher" />
 
 	<bean id="eventservice" class="mom.eventservice.JeroMqEventService"
 		init-method="up">
 		<constructor-arg name="context" ref="networkContext" />
-		<constructor-arg name="outAddress" value="tcp://169.1.1.1:6000" />
+		<constructor-arg name="outAddress" value="${eventservice.jero.out}" />
 		<constructor-arg name="inAddresses">
 			<set>
-				<value>tcp://169.1.1.2:5001</value>
-				<value>tcp://169.1.1.2:5002</value>
-				<value>tcp://169.1.1.2:5003</value>
-				<value>tcp://169.1.1.2:5004</value>
+				<value>${eventservice.jero.in1}</value>
+				<value>${eventservice.jero.in2}</value>
+				<value>${eventservice.jero.in3}</value>
+				<value>${eventservice.jero.in4}</value>
 			</set>
 		</constructor-arg>
 		<constructor-arg>
 			<ref bean="killSwitch" />
 		</constructor-arg>
-
 	</bean>
 </beans>
