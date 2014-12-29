@@ -1,4 +1,4 @@
-package mom;
+package mom.main;
 
 import mom.simulation.Simulation;
 import mom.util.Logging;

@@ -3,18 +3,24 @@ package mom.eventservice;
 import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import mom.net.JeroMqNetworkContext;
 import mom.util.KillSwitch;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.zeromq.ZMQ;
 
 public class JeroMqEventService implements EventService {
-    private final ZMQ.Context ctx = ZMQ.context(1);
-    private final ZMQ.Socket sub = ctx.socket(ZMQ.SUB);
-    private final ZMQ.Socket pub = ctx.socket(ZMQ.PUB);
+    private final static Logger logger = LoggerFactory.getLogger(JeroMqEventService.class);
+    private final JeroMqNetworkContext context;
     private final Set<String> inAddresses;
     private final String outAddress;
     private final KillSwitch killSwitch;
+    private ZMQ.Socket sub;
+    private ZMQ.Socket pub;
 
-    public JeroMqEventService(String outAddress, Set<String> inAddresses, KillSwitch killSwitch) {
+    public JeroMqEventService(JeroMqNetworkContext context, String outAddress, Set<String> inAddresses,
+            KillSwitch killSwitch) {
+        this.context = context;
         this.outAddress = outAddress;
         this.inAddresses = inAddresses;
         this.killSwitch = killSwitch;
@@ -22,17 +28,22 @@ public class JeroMqEventService implements EventService {
 
     @Override
     public void run() {
+        logger.info("running event service");
         while (!killSwitch.isSet()) {
             String msg = sub.recvStr();
-            pub.send(msg);
+            if (!killSwitch.isSet())
+                pub.send(msg);
         }
+        logger.info("stopping event service");
     }
 
     @PostConstruct
-    public void up(String address) {
+    public void up() {
+        logger.info("setting up event service (in(%s), out(%s))", inAddresses, outAddress);
+        sub = context.socket(ZMQ.SUB);
         inAddresses.forEach(s -> sub.connect(s));
         sub.subscribe("".getBytes());
-        sub.setReceiveTimeOut(1);
+        pub = context.socket(ZMQ.PUB);
         pub.bind(outAddress);
     }
 
@@ -40,6 +51,5 @@ public class JeroMqEventService implements EventService {
     public void tearDown() {
         sub.close();
         pub.close();
-        ctx.close();
     }
 }

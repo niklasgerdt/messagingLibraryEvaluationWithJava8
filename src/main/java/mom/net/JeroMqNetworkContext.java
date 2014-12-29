@@ -1,5 +1,6 @@
 package mom.net;
 
+import javax.annotation.PreDestroy;
 import org.zeromq.ZMQ;
 import org.zeromq.ZMQ.Socket;
 
@@ -22,7 +23,8 @@ public class JeroMqNetworkContext {
         }
     }
 
-    public void term() {
+    @PreDestroy
+    private void term() {
         ctx.term();
     }
 }

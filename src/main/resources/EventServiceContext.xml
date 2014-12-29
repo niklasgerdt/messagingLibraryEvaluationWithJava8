@@ -5,12 +5,17 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context
 			http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<bean id="killSwitch" class="mom.util.KillSwitch" />
+	<bean id="networkContext" class="mom.net.JeroMqNetworkContext"></bean>
 
-	<bean id="eventservice" class="mom.eventservice.JeroMqEventService">
-		<constructor-arg name="outAddress">
-			<value>tcp://169.1.1.1:6000</value>
-		</constructor-arg>
+	<bean id="publisher" class="mom.publisher.JeroMqPublisher"
+		c:networkContext-ref="networkContext" c:address="tcp://169.1.1.1" />
+
+	<bean id="killSwitch" class="mom.util.KillSwitch" c:publisher-ref="publisher" />
+
+	<bean id="eventservice" class="mom.eventservice.JeroMqEventService"
+		init-method="up">
+		<constructor-arg name="context" ref="networkContext" />
+		<constructor-arg name="outAddress" value="tcp://169.1.1.1:6000" />
 		<constructor-arg name="inAddresses">
 			<set>
 				<value>tcp://169.1.1.2:5001</value>
@@ -22,5 +27,6 @@
 		<constructor-arg>
 			<ref bean="killSwitch" />
 		</constructor-arg>
+
 	</bean>
 </beans>

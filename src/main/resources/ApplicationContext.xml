@@ -8,11 +8,10 @@
 	<context:property-placeholder
 		location="basic_simulation.properties, jdbc.properties" />
 
-	<bean id="networkContext" class="mom.JeroMqNetworkContext"></bean>
+	<bean id="networkContext" class="mom.net.JeroMqNetworkContext"></bean>
 
-	<bean id="pauser" class="mom.Pauser" c:nanoPause="${pauselength}"></bean>
+	<bean id="pauser" class="mom.util.Pauser" c:nanoPause="${pauselength}"></bean>
 
-	<bean id="eventDao" class="mom.dao.EventDao" c:dataSource-ref="datasource"></bean>
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
@@ -22,16 +21,18 @@
 		<property name="password" value="${jdbc.password}" />
 	</bean>
 
-	<bean id="eventsource1" class="mom.EventSource" c:id="1"
+	<bean id="eventDao" class="mom.dao.EventDao" c:dataSource-ref="datasource"></bean>
+
+	<bean id="eventsource1" class="mom.event.EventSource" c:id="1"
 		c:limit="${eventlimit}" c:msgLen="
 		${eventlength" c:pauser-ref="pauser"></bean>
-	<bean id="eventsource2" class="mom.EventSource" c:id="2"
+	<bean id="eventsource2" class="mom.event.EventSource" c:id="2"
 		c:limit="${eventlimit}" c:msgLen="
 		${eventlength" c:pauser-ref="pauser"></bean>
-	<bean id="eventsource3" class="mom.EventSource" c:id="3"
+	<bean id="eventsource3" class="mom.event.EventSource" c:id="3"
 		c:limit="${eventlimit}" c:msgLen="
 		${eventlength" c:pauser-ref="pauser"></bean>
-	<bean id="eventsource4" class="mom.EventSource" c:id="4"
+	<bean id="eventsource4" class="mom.event.EventSource" c:id="4"
 		c:limit="${eventlimit}" c:msgLen="
 		${eventlength" c:pauser-ref="pauser"></bean>
 
@@ -44,14 +45,14 @@
 	<bean id="publisher4" class="mom.publisher.JeroMqPublisher"
 		c:networkContext-ref="networkContext" c:address="${publisher.address4}" />
 
-	<bean id="simulator1" class="mom.Simulator" c:eventSource-ref="eventsource1"
-		c:publisher-ref="publisher1"></bean>
-	<bean id="simulator2" class="mom.Simulator" c:eventSource-ref="eventsource2"
-		c:publisher-ref="publisher2"></bean>
-	<bean id="simulator3" class="mom.Simulator" c:eventSource-ref="eventsource3"
-		c:publisher-ref="publisher3"></bean>
-	<bean id="simulator4" class="mom.Simulator" c:eventSource-ref="eventsource4"
-		c:publisher-ref="publisher4"></bean>
+	<bean id="simulator1" class="mom.simulation.Simulator"
+		c:eventSource-ref="eventsource1" c:publisher-ref="publisher1"></bean>
+	<bean id="simulator2" class="mom.simulation.Simulator"
+		c:eventSource-ref="eventsource2" c:publisher-ref="publisher2"></bean>
+	<bean id="simulator3" class="mom.simulation.Simulator"
+		c:eventSource-ref="eventsource3" c:publisher-ref="publisher3"></bean>
+	<bean id="simulator4" class="mom.simulation.Simulator"
+		c:eventSource-ref="eventsource4" c:publisher-ref="publisher4"></bean>
 
 	<bean id="subscriber1" class="mom.subscriber.JeroMqSubscriber"
 		c:networkContext-ref="networkContext" c:address="${subscriber.address1}" />
