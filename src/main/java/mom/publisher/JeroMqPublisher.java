@@ -1,8 +1,10 @@
 package mom.publisher;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import mom.event.Event;
 import mom.net.NetworkContext;
+import mom.net.OutputAddressFactory;
 import mom.net.Socket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,21 +21,28 @@ import com.google.gson.Gson;
 public class JeroMqPublisher implements Publisher {
     private final static Logger logger = LoggerFactory.getLogger(JeroMqPublisher.class);
     private final Gson gson = new Gson();
-    @Autowired
-    private NetworkContext ctx;
+    private final NetworkContext ctx;
+    private final OutputAddressFactory addressFactory;
     private Socket socket;
 
-    @Override
-    public void bind(String address) {
-        logger.info("binding publisher socket to address {}", address);
-        socket = ctx.socket(ZMQ.PUB);
-        socket.bind(address);
+    @Autowired
+    public JeroMqPublisher(final NetworkContext ctx, final OutputAddressFactory addressFactory) {
+        this.ctx = ctx;
+        this.addressFactory = addressFactory;
     }
 
     @Override
     public void pub(Event e) {
         String notification = gson.toJson(e);
         socket.send(notification);
+    }
+
+    @PostConstruct
+    public void bind() {
+        String address = addressFactory.getNextAddress();
+        logger.info("binding publisher socket to address {}", address);
+        socket = ctx.socket(ZMQ.PUB);
+        socket.bind(address);
     }
 
     @PreDestroy
