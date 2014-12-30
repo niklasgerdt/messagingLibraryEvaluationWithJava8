@@ -1,16 +1,20 @@
 package mom.util;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
+import mom.config.SimulationConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
-@PropertySource("classpath:basic_simulation.properties")
+@Scope("prototype")
+@Lazy
 public class Pauser {
-    private final long nanoPause;
+    private final int nanoPause;
 
-    public Pauser(@Value("${pauselength}") long nanoPause) {
-        this.nanoPause = nanoPause;
+    @Autowired
+    public Pauser(SimulationConfiguration conf) {
+        this.nanoPause = conf.getSimulators().get(0).getPauseBetweenEvents();
     }
 
     // Busy wait for granularity

@@ -6,7 +6,7 @@
 //
 
 
-package moma.config.api;
+package mom.config.api;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

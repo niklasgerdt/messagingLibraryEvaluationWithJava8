@@ -1,4 +1,4 @@
-package moma.net;
+package mom.net;
 
 import org.zeromq.ZMQ;
 
@@ -19,5 +19,21 @@ public class Socket {
 
     public void close() {
         socket.close();
+    }
+
+    public byte[] recv() {
+        return socket.recv();
+    }
+
+    public void connect(String address) {
+        socket.connect(address);
+    }
+
+    public String recvStr() {
+        return socket.recvStr();
+    }
+
+    public void subscribe(byte[] bytes) {
+        socket.subscribe(bytes);
     }
 }

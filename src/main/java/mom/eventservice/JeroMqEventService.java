@@ -3,7 +3,8 @@ package mom.eventservice;
 import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import mom.net.JeroMqNetworkContext;
+import mom.net.NetworkContext;
+import mom.net.Socket;
 import mom.util.KillSwitch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,17 +21,16 @@ import org.zeromq.ZMQ;
 public class JeroMqEventService implements EventService {
     private final static Logger logger = LoggerFactory.getLogger(JeroMqEventService.class);
     @Autowired(required = true)
-    private JeroMqNetworkContext context;
+    private NetworkContext context;
     private final Set<String> inAddresses;
     @Value("${eventservice.jero.out}")
     private String outAddress;
     @Autowired
     private final KillSwitch killSwitch;
-    private ZMQ.Socket sub;
-    private ZMQ.Socket pub;
+    private Socket sub;
+    private Socket pub;
 
-    public JeroMqEventService(JeroMqNetworkContext context, String outAddress, Set<String> inAddresses,
-            KillSwitch killSwitch) {
+    public JeroMqEventService(NetworkContext context, String outAddress, Set<String> inAddresses, KillSwitch killSwitch) {
         this.context = context;
         this.outAddress = outAddress;
         this.inAddresses = inAddresses;

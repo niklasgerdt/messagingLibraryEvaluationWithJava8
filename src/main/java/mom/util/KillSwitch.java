@@ -12,12 +12,8 @@ import org.springframework.stereotype.Component;
 public class KillSwitch implements Runnable {
     final static Logger logger = LoggerFactory.getLogger(KillSwitch.class);
     private volatile boolean set = false;
-    private final Publisher publisher;
-
     @Autowired
-    public KillSwitch(Publisher publisher) {
-        this.publisher = publisher;
-    }
+    private Publisher publisher;
 
     public void waitForKill() {
         System.out.println("press any key to stop event service...");

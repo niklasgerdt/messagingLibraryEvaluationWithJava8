@@ -1,6 +1,7 @@
 package mom.subscriber;
 
-import mom.net.JeroMqNetworkContext;
+import mom.net.NetworkContext;
+import mom.net.Socket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
@@ -9,11 +10,11 @@ import org.zeromq.ZMQ;
 
 public class JeroMqSubscriber extends Subscriber implements InitializingBean, DisposableBean {
     private final static Logger logger = LoggerFactory.getLogger(JeroMqSubscriber.class);
-    private JeroMqNetworkContext context;
+    private NetworkContext context;
     private final String address;
-    private ZMQ.Socket socket;
+    private Socket socket;
 
-    public JeroMqSubscriber(JeroMqNetworkContext networkContext, String address) {
+    public JeroMqSubscriber(NetworkContext networkContext, String address) {
         this.context = networkContext;
         this.address = address;
     }

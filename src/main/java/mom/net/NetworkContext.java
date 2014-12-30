@@ -1,4 +1,4 @@
-package moma.net;
+package mom.net;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;

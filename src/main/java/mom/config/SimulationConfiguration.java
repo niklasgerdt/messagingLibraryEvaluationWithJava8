@@ -1,4 +1,4 @@
-package moma.config;
+package mom.config;
 
 import java.util.ArrayList;
 import java.util.List;

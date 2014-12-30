@@ -1,9 +1,10 @@
 package moma.simulation;
 
 import java.util.Optional;
-import moma.event.Event;
-import moma.event.EventSource;
-import moma.publisher.Publisher;
+import mom.event.Event;
+import mom.event.EventSource;
+import mom.publisher.Publisher;
+import mom.simulation.Simulator;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

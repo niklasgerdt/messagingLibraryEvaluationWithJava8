@@ -6,7 +6,7 @@
 //
 
 
-package moma.config.api;
+package mom.config.api;
 
 import java.math.BigInteger;
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
-package moma.config;
+package mom.config;
 
 import lombok.NonNull;
-import moma.simulation.Simulation;
+import mom.simulation.Simulation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
