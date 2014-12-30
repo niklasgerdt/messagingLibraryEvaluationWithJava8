@@ -4,36 +4,31 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.function.Supplier;
 import javax.annotation.PostConstruct;
+import moma.config.SimulationConfiguration;
 import moma.util.Pauser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
 @Scope("prototype")
-@PropertySource("classpath:basic_simulation.properties")
+@Lazy
 public class EventSource implements Supplier<Optional<Event>> {
     private final static Logger logger = LoggerFactory.getLogger(EventSource.class);
-    private static int ID = 0;
-    private final int id = ID++;
-    @Autowired
-    private Pauser pauser;
-    @Value("${eventlength}")
-    private int eventlength;
+    private final int id;
+    private final Pauser pauser;
+    private final int eventlength;
     private String content;
     private int eventId = 0;
 
-    @PostConstruct
-    public void createEventContent() {
-        Random r = new Random();
-        byte[] bytes = new byte[eventlength];
-        r.nextBytes(bytes);
-        content = bytes.toString();
-        logger.info("created new event source {}", id);
+    @Autowired
+    public EventSource(Pauser pauser, SimulationConfiguration simulationConfiguration) {
+        this.pauser = pauser;
+        this.id = simulationConfiguration.getSimulators().get(0).getSimulatorId();
+        this.eventlength = simulationConfiguration.getSimulators().get(0).getEventContentLength();
     }
 
     @Override
@@ -41,5 +36,14 @@ public class EventSource implements Supplier<Optional<Event>> {
         pauser.pause();
         eventId++;
         return Optional.of(new Event(id, eventId, content));
+    }
+
+    @PostConstruct
+    public void createEventContent() {
+        Random r = new Random();
+        byte[] bytes = new byte[eventlength];
+        r.nextBytes(bytes);
+        content = bytes.toString();
+        logger.info("created new event content {}", content);
     }
 }

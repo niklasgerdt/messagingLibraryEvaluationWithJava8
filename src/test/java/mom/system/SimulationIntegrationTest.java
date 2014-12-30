@@ -1,6 +1,7 @@
 package mom.system;
 
 import mom.simulation.Simulation;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ public class SimulationIntegrationTest {
     private Simulation simulation;
 
     @Test
+    @Ignore
     public void runsClean() {
         simulation.run();
     }

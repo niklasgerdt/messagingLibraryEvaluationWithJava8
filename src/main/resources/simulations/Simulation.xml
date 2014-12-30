@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:simulation xmlns:p="http://www.w3schools.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3schools.com ../SimulationSchema.xsd ">
+
+	<p:system-under-test>test</p:system-under-test>
+	<p:simulators>
+		<p:simulator>
+			<p:id>0</p:id>
+		</p:simulator>
+	</p:simulators>
+	<p:listeners>
+		<p:listener>
+			<p:id>0</p:id>
+		</p:listener>
+	</p:listeners>
+</p:simulation>

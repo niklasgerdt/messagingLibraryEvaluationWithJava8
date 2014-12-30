@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:simulation xmlns:p="http://www.w3schools.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3schools.com SimulationSchema.xsd ">
+	<p:name>p:name</p:name>
+	<p:system-under-test>p:system-under-test</p:system-under-test>
+	<p:simulators>
+		<p:simulator>
+			<p:id>0</p:id>
+			<p:name>0</p:name>
+			<p:event-content-length>100</p:event-content-length>
+			<p:pause-between-events>10000</p:pause-between-events>
+		</p:simulator>
+		<p:simulator>
+			<p:id>1</p:id>
+			<p:name>1</p:name>
+			<p:event-content-length>100</p:event-content-length>
+			<p:pause-between-events>10000</p:pause-between-events>
+		</p:simulator>
+	</p:simulators>
+</p:simulation>
