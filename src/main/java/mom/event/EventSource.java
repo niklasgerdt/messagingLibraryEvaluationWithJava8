@@ -4,11 +4,12 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.function.Supplier;
 import javax.annotation.PostConstruct;
-import mom.config.SimulationConfiguration;
+import mom.config.ActiveSimulatorConfiguration;
 import mom.util.Pauser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -25,10 +26,11 @@ public class EventSource implements Supplier<Optional<Event>> {
     private int eventId = 0;
 
     @Autowired
-    public EventSource(Pauser pauser, SimulationConfiguration simulationConfiguration) {
+    public EventSource(Pauser pauser,
+            @Qualifier("activeSimulatorConfiguration") ActiveSimulatorConfiguration simulatorConfiguration) {
         this.pauser = pauser;
-        this.id = simulationConfiguration.getSimulators().get(0).getSimulatorId();
-        this.eventlength = simulationConfiguration.getSimulators().get(0).getEventContentLength();
+        this.id = simulatorConfiguration.getSimulatorId();
+        this.eventlength = simulatorConfiguration.getEventContentLength();
     }
 
     @Override

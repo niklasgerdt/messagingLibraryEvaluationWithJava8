@@ -1,8 +1,8 @@
 package mom.main;
 
 import mom.config.Config;
-import mom.config.SimulationConfigurer;
 import mom.simulation.Simulation;
+import mom.simulation.SimulationConfigurer;
 import mom.util.Logging;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

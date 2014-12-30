@@ -1,7 +1,8 @@
 package mom.util;
 
-import mom.config.SimulationConfiguration;
+import mom.config.ActiveSimulatorConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -13,8 +14,8 @@ public class Pauser {
     private final int nanoPause;
 
     @Autowired
-    public Pauser(SimulationConfiguration conf) {
-        this.nanoPause = conf.getSimulators().get(0).getPauseBetweenEvents();
+    public Pauser(@Qualifier("activeSimulatorConfiguration") ActiveSimulatorConfiguration conf) {
+        this.nanoPause = conf.getPauseBetweenEvents();
     }
 
     // Busy wait for granularity
