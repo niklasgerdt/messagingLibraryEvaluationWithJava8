@@ -21,9 +21,9 @@
 										<xs:element name="name" type="xs:string" minOccurs="0"
 											maxOccurs="1" />
 										<xs:element name="event-content-length" type="xs:integer"
-											default="100" minOccurs="0" maxOccurs="1" />
+											default="100" minOccurs="1" maxOccurs="1" />
 										<xs:element name="pause-between-events" type="xs:integer"
-											default="10000" minOccurs="0" maxOccurs="1" />
+											default="10000" minOccurs="1" maxOccurs="1" />
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>

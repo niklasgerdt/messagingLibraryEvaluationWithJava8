@@ -23,4 +23,9 @@ public class SimulationConfigurationFactory {
     public SimulatorConfiguration simulatorConfiguration() {
         return ctx.getBean(SimulatorConfiguration.class);
     }
+
+    @Bean
+    public ListenerConfiguration listenerConfiguration() {
+        return ctx.getBean(ListenerConfiguration.class);
+    }
 }

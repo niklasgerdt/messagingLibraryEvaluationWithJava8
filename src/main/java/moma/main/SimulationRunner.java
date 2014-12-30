@@ -1,8 +1,9 @@
 package moma.main;
 
-import mom.util.Logging;
 import moma.config.Config;
 import moma.config.SimulationConfigurer;
+import moma.simulation.Simulation;
+import moma.util.Logging;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -19,11 +20,10 @@ public class SimulationRunner {
         @SuppressWarnings("resource")
         ApplicationContext ctx = new AnnotationConfigApplicationContext(Config.class);
         ((AbstractApplicationContext) ctx).registerShutdownHook();
+
         SimulationConfigurer config = ctx.getBean(SimulationConfigurer.class);
-        System.out.println(args[0]);
-        config.configure(args[0]);
-        // Simulation simulation = ctx.getBean(Simulation.class);
-        // simulation.run();
+        Simulation simulation = config.configure(args[0]);
+        simulation.run();
 
         logger.info("ending simulation");
         Logging.stopLogging();

@@ -1,6 +1,7 @@
 package moma.config;
 
 import lombok.NonNull;
+import moma.simulation.Simulation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,9 +14,11 @@ public class SimulationConfigurer {
         this.apiReader = xmlApiReader;
     }
 
-    public moma.simulation.Simulation configure(@NonNull final String apiFileName) {
+    public Simulation configure(@NonNull final String apiFileName) {
         final SimulationConfiguration conf = apiReader.readSimulationConfiguration(apiFileName);
-
+        System.out.println(conf.getProfile());
+        System.out.println(conf.getSimulators());
+        System.out.println(conf.getListeners());
         return null;
     }
 }

@@ -15,8 +15,14 @@ public class SimulationConfiguration {
     private String profile;
     @Getter
     private List<SimulatorConfiguration> simulators = new ArrayList<>();
+    @Getter
+    private List<ListenerConfiguration> listeners = new ArrayList<>();
 
     public void addSimulatorConfig(SimulatorConfiguration simConf) {
         simulators.add(simConf);
+    }
+
+    public void addListenerConfig(ListenerConfiguration listConf) {
+        listeners.add(listConf);
     }
 }
