@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.w3schools.com" xmlns="http://www.w3schools.com"
+	elementFormDefault="qualified">
+
+	<xs:element name="simulation">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="name" type="xs:string" />
+				<xs:element name="system-under-test" type="xs:string" />
+				<xs:element name="simulators">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="simulator">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="id" type="xs:integer" />
+										<xs:element name="name" type="xs:string" />
+										<xs:element name="event-content-length" type="xs:integer"
+											default="100" />
+										<xs:element name="pause-between-events" type="xs:integer"
+											default="10000" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
