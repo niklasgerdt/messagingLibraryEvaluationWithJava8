@@ -8,7 +8,6 @@ import mom.net.Socket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Profile;
@@ -23,7 +22,6 @@ import com.google.gson.Gson;
 @Profile({ "zero", "default" })
 @Lazy
 @PropertySource("classpath:/basic_simulation.properties")
-@Qualifier("subscriber")
 public class JeroMqSubscriber implements Subscriber {
     private final static Logger logger = LoggerFactory.getLogger(JeroMqSubscriber.class);
     private final Gson gson = new Gson();
@@ -51,6 +49,7 @@ public class JeroMqSubscriber implements Subscriber {
         logger.info("setting up subscriber {}", address);
         socket = context.socket(ZMQ.SUB);
         socket.connect(address);
+        socket.subscribe("".getBytes());
         logger.info("connected {}", address);
     }
 

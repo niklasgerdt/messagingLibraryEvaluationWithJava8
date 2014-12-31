@@ -33,13 +33,17 @@ public class SimulationConfigurer {
     public Simulation configure(@NonNull final String apiFileName) {
         logger.info("reading simulation configuration from file {}", apiFileName);
         final SimulationConfiguration conf = apiReader.readSimulationConfiguration(apiFileName);
-        configureSimulators(conf);
-        configureListeners(conf);
+        Set<Simulator> simulators = configureSimulators(conf);
+        Set<Listener> listeners = configureListeners(conf);
         logger.info("building simulation");
-        return simulationFactory.simulation();
+        Simulation s = simulationFactory.simulation();
+        s.setSimulators(simulators);
+        s.setListeners(listeners);
+        logger.info("builded simulation");
+        return s;
     }
 
-    private void configureSimulators(final SimulationConfiguration conf) {
+    private Set<Simulator> configureSimulators(final SimulationConfiguration conf) {
         logger.info("configuring simulators {}", conf.getSimulators());
         Set<Simulator> simulators = simulationFactory.simulators();
         for (SimulatorConfiguration s : conf.getSimulators()) {
@@ -49,9 +53,10 @@ public class SimulationConfigurer {
             simulators.add(simulationFactory.simulator());
         }
         logger.info("builded simulators {}", simulators);
+        return simulators;
     }
 
-    private void configureListeners(final SimulationConfiguration conf) {
+    private Set<Listener> configureListeners(final SimulationConfiguration conf) {
         logger.info("configuring listeners {}", conf.getListeners());
         Set<Listener> listeners = simulationFactory.listeners();
         for (ListenerConfiguration l : conf.getListeners()) {
@@ -59,5 +64,6 @@ public class SimulationConfigurer {
             listeners.add(simulationFactory.listener());
         }
         logger.info("builded listeners {}", listeners);
+        return listeners;
     }
 }

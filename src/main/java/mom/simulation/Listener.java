@@ -6,12 +6,10 @@ import lombok.NonNull;
 import mom.config.ActiveListenerConfiguration;
 import mom.dao.EventDao;
 import mom.event.Event;
-import mom.subscriber.JeroMqSubscriber;
 import mom.subscriber.Subscriber;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.PropertySource;
@@ -23,7 +21,7 @@ import org.springframework.stereotype.Component;
 @Scope("prototype")
 @PropertySource("classpath:/basic_simulation.properties")
 public class Listener implements Runnable {
-    private final static Logger logger = LoggerFactory.getLogger(JeroMqSubscriber.class);
+    private final static Logger logger = LoggerFactory.getLogger(Listener.class);
     private final Subscriber subscriber;
     private final EventDao eventDao;
     private final int eventLimit;
@@ -32,10 +30,9 @@ public class Listener implements Runnable {
     private final int id;
 
     @Autowired
-    public Listener(@NonNull @Qualifier("subscriber") final Subscriber subscriber, @NonNull final EventDao eventDao,
+    public Listener(@NonNull final Subscriber subscriber, @NonNull final EventDao eventDao,
             @Value("${eventlimit}") final int eventLimit,
-            @Qualifier("activeListenerConfiguration") @NonNull final ActiveListenerConfiguration listenerConfiguration,
-            @NonNull final EndSimulation endSimulation) {
+            @NonNull final ActiveListenerConfiguration listenerConfiguration, @NonNull final EndSimulation endSimulation) {
         this.subscriber = subscriber;
         this.eventDao = eventDao;
         this.eventLimit = eventLimit;
@@ -49,6 +46,7 @@ public class Listener implements Runnable {
     public void run() {
         while (!ending.isEnded()) {
             Event e = subscriber.receive();
+            logger.debug("received.event {}", e);
             events.add(e);
             if (events.size() == eventLimit)
                 eventDao.insertAll(events);

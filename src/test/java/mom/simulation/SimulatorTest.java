@@ -1,4 +1,4 @@
-package moma.simulation;
+package mom.simulation;
 
 import java.util.Optional;
 import mom.event.Event;

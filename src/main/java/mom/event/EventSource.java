@@ -35,9 +35,12 @@ public class EventSource implements Supplier<Optional<Event>> {
 
     @Override
     public Optional<Event> get() {
+        logger.trace("creating event");
         pauser.pause();
         eventId++;
-        return Optional.of(new Event(id, eventId, content));
+        Event e = new Event(id, eventId, content);
+        logger.trace("created event {}", e);
+        return Optional.of(e);
     }
 
     @PostConstruct

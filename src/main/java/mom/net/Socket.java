@@ -40,10 +40,10 @@ public class Socket {
     }
 
     public void setReceiveTimeOut() {
-        socket.setReceiveTimeOut(10);
+        socket.setReceiveTimeOut(1000);
     }
 
     public void setSendTimeOut() {
-        socket.setSendTimeOut(10);
+        socket.setSendTimeOut(1000);
     }
 }
