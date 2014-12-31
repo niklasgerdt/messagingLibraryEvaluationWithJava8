@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
@@ -20,6 +21,7 @@ import com.google.gson.Gson;
 @Component
 @Scope("prototype")
 @Profile({ "zero", "default" })
+@Lazy
 @PropertySource("classpath:/basic_simulation.properties")
 @Qualifier("subscriber")
 public class JeroMqSubscriber implements Subscriber {

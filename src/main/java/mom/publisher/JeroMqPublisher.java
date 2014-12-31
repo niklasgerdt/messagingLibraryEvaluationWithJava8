@@ -45,6 +45,7 @@ public class JeroMqPublisher implements Publisher {
         logger.info("binding publisher socket to address {}", address);
         socket = ctx.socket(ZMQ.PUB);
         socket.bind(address);
+        logger.info("binded publisher {}", address);
     }
 
     @PreDestroy

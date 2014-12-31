@@ -3,7 +3,6 @@ package mom.simulation;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import lombok.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +13,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Lazy
-@Scope("singleton")
+@Scope("prototype")
 public class Simulation {
     final static Logger logger = LoggerFactory.getLogger(Simulation.class);
     private final Set<Simulator> simulators;
     private final Set<Listener> listeners;
 
     @Autowired
-    public Simulation(@Qualifier("simulators") @NonNull Set<Simulator> simulators,
-            @Qualifier("listeners") @NonNull Set<Listener> listeners) {
+    public Simulation(@Qualifier("simulators") Set<Simulator> simulators,
+            @Qualifier("listeners") Set<Listener> listeners) {
         logger.info("initialising simulation with simulators {} and listeners {}", simulators, listeners);
         this.simulators = simulators;
         this.listeners = listeners;

@@ -11,31 +11,9 @@ import org.springframework.context.annotation.Scope;
 
 @Configuration
 public class SimulationBeans {
-    private final static Logger logger = LoggerFactory.getLogger(SimulationFactory.class);
+    private final static Logger logger = LoggerFactory.getLogger(SimulationBeans.class);
     private Set<Simulator> simulators = new HashSet<>();
     private Set<Listener> listeners = new HashSet<>();
-
-    @Bean
-    @Lazy
-    public Simulation simulation() {
-        logger.info("serving {}", Simulation.class);
-        // Simulation s = ctx.getBean(Simulation.class);
-        Simulation s = new Simulation(simulators, listeners);
-        logger.info("created {}", s);
-        return s;
-    }
-
-    @Bean
-    public Simulator simulator() {
-        logger.info("serving {}", Simulator.class);
-        return ctx.getBean(Simulator.class);
-    }
-
-    @Bean(name = "newListener")
-    public Listener newListener() {
-        logger.info("serving {}", Listener.class);
-        return ctx.getBean(Listener.class);
-    }
 
     @Bean(name = "simulators")
     @Scope("singleton")
@@ -52,12 +30,4 @@ public class SimulationBeans {
         logger.info("serving listeners", Set.class);
         return listeners;
     }
-
-    // @Bean
-    // @Lazy
-    // @Scope("prototype")
-    // public Subscriber subscriber() {
-    // logger.info("serving ", Subscriber.class);
-    // return ctx.getBean(Subscriber.class);
-    // }
 }

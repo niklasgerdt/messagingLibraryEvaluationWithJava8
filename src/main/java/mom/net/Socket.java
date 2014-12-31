@@ -11,6 +11,7 @@ public class Socket {
 
     public void bind(String address) {
         socket.bind(address);
+        setSendTimeOut();
     }
 
     public void send(String notification) {
@@ -27,6 +28,7 @@ public class Socket {
 
     public void connect(String address) {
         socket.connect(address);
+        setReceiveTimeOut();
     }
 
     public String recvStr() {
@@ -35,5 +37,13 @@ public class Socket {
 
     public void subscribe(byte[] bytes) {
         socket.subscribe(bytes);
+    }
+
+    public void setReceiveTimeOut() {
+        socket.setReceiveTimeOut(10);
+    }
+
+    public void setSendTimeOut() {
+        socket.setSendTimeOut(10);
     }
 }

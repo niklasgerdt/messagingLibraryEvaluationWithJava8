@@ -5,9 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -32,33 +29,20 @@ public class SimulationFactory {
         return ctx.getBean(Simulator.class);
     }
 
-    @Bean(name = "newListener")
-    public Listener newListener() {
+    public Listener listener() {
         logger.info("serving {}", Listener.class);
         return ctx.getBean(Listener.class);
     }
 
-    @Bean(name = "simulators")
-    @Scope("singleton")
-    @Lazy
+    @SuppressWarnings("unchecked")
     public Set<Simulator> simulators() {
         logger.info("serving simulators", Set.class);
-        return simulators;
+        return (Set<Simulator>) ctx.getBean("simulators");
     }
 
-    @Bean(name = "listeners")
-    @Scope("singleton")
-    @Lazy
+    @SuppressWarnings("unchecked")
     public Set<Listener> listeners() {
         logger.info("serving listeners", Set.class);
-        return listeners;
+        return (Set<Listener>) ctx.getBean("listeners");
     }
-
-    // @Bean
-    // @Lazy
-    // @Scope("prototype")
-    // public Subscriber subscriber() {
-    // logger.info("serving ", Subscriber.class);
-    // return ctx.getBean(Subscriber.class);
-    // }
 }

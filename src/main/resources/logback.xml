@@ -14,11 +14,11 @@
 		</encoder>
 	</appender>
 
-	<logger name="eu.route20.hft">
+	<logger name="mom">
 		<appender-ref ref="FILE" />
 	</logger>
 
-	<root level="info">
+	<root level="debug">
 		<appender-ref ref="STDOUT" />
 	</root>
 </configuration>

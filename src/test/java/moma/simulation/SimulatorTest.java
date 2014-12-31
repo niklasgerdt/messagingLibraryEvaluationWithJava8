@@ -24,7 +24,7 @@ public class SimulatorTest {
     @Before
     public void setupMocks() {
         MockitoAnnotations.initMocks(this);
-        sim = new Simulator(src, pub, limit);
+        sim = new Simulator(src, pub, limit, null);
     }
 
     @SuppressWarnings("unchecked")

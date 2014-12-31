@@ -39,16 +39,6 @@ public class SimulationConfigurer {
         return simulationFactory.simulation();
     }
 
-    private void configureListeners(final SimulationConfiguration conf) {
-        logger.info("configuring listeners {}", conf.getListeners());
-        Set<Listener> listeners = simulationFactory.listeners();
-        for (ListenerConfiguration l : conf.getListeners()) {
-            activeListener.setId(l.getId());
-            listeners.add(simulationFactory.newListener());
-        }
-        logger.info("builded listeners {}", listeners);
-    }
-
     private void configureSimulators(final SimulationConfiguration conf) {
         logger.info("configuring simulators {}", conf.getSimulators());
         Set<Simulator> simulators = simulationFactory.simulators();
@@ -59,5 +49,15 @@ public class SimulationConfigurer {
             simulators.add(simulationFactory.simulator());
         }
         logger.info("builded simulators {}", simulators);
+    }
+
+    private void configureListeners(final SimulationConfiguration conf) {
+        logger.info("configuring listeners {}", conf.getListeners());
+        Set<Listener> listeners = simulationFactory.listeners();
+        for (ListenerConfiguration l : conf.getListeners()) {
+            activeListener.setId(l.getId());
+            listeners.add(simulationFactory.listener());
+        }
+        logger.info("builded listeners {}", listeners);
     }
 }
