@@ -1,10 +1,7 @@
-package moma.config;
+package mom.config;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import mom.config.SimulationConfiguration;
-import mom.config.SimulationConfigurationFactory;
-import mom.config.SimulatorConfiguration;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +34,7 @@ public class SimulationConfigurationFactoryTest {
     }
 
     @Configuration
-    @ComponentScan(basePackages = "moma.config")
+    @ComponentScan(basePackages = "mom.config")
     static class Config {
     }
 }

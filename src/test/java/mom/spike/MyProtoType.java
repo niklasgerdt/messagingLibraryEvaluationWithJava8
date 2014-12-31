@@ -1,4 +1,4 @@
-package moma.spike;
+package mom.spike;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

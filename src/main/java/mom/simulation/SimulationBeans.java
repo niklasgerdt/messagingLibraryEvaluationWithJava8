@@ -1,32 +1,31 @@
 package mom.simulation;
 
+import java.util.HashSet;
 import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
-@Component
-public class SimulationFactory {
+@Configuration
+public class SimulationBeans {
     private final static Logger logger = LoggerFactory.getLogger(SimulationFactory.class);
-    private final ApplicationContext ctx;
+    private Set<Simulator> simulators = new HashSet<>();
+    private Set<Listener> listeners = new HashSet<>();
 
-    @Autowired
-    public SimulationFactory(final ApplicationContext ctx) {
-        logger.info("wiring context");
-        this.ctx = ctx;
-    }
-
+    @Bean
+    @Lazy
     public Simulation simulation() {
         logger.info("serving {}", Simulation.class);
-        Simulation s = ctx.getBean(Simulation.class);
+        // Simulation s = ctx.getBean(Simulation.class);
+        Simulation s = new Simulation(simulators, listeners);
+        logger.info("created {}", s);
         return s;
     }
 
+    @Bean
     public Simulator simulator() {
         logger.info("serving {}", Simulator.class);
         return ctx.getBean(Simulator.class);

@@ -1,6 +1,7 @@
 package mom.net;
 
 import java.util.concurrent.atomic.AtomicInteger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
@@ -11,7 +12,8 @@ public class OutputAddressFactory {
     private final AtomicInteger port;
     private final String address;
 
-    public OutputAddressFactory(@Value("${baseOutputPort}") final int basePort,
+    @Autowired
+    public OutputAddressFactory(@Value("${baseOutputPort}") int basePort,
             @Value("${baseOutputAddress}") final String address) {
         this.port = new AtomicInteger(basePort);
         this.address = address;

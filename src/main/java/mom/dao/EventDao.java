@@ -18,6 +18,7 @@ public class EventDao {
 
     @Autowired
     public EventDao(DataSource dataSource) {
+        logger.info("creating eventdao");
         this.jdbc = new NamedParameterJdbcTemplate(dataSource);
     }
 

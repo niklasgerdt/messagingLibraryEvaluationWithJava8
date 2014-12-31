@@ -1,4 +1,4 @@
-package moma.spike;
+package mom.spike;
 
 import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
@@ -24,7 +24,7 @@ public class PrototypeSpikeTest {
     }
 
     @Configuration
-    @ComponentScan(basePackages = "moma.spike")
+    @ComponentScan(basePackages = "mom.spike")
     static class Config {
     }
 }

@@ -19,13 +19,13 @@ public class SimulationConfigurationFactory {
         return ctx.getBean(SimulationConfiguration.class);
     }
 
-    @Bean
+    @Bean(name = "simulatorConfiguration")
     public SimulatorConfiguration simulatorConfiguration() {
-        return ctx.getBean(SimulatorConfiguration.class);
+        return ctx.getBean("simulatorConfiguration", SimulatorConfiguration.class);
     }
 
-    @Bean
+    @Bean(name = "simulatorConfiguration")
     public ListenerConfiguration listenerConfiguration() {
-        return ctx.getBean(ListenerConfiguration.class);
+        return ctx.getBean("listenerConfiguration", ListenerConfiguration.class);
     }
 }
