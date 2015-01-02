@@ -8,7 +8,7 @@
 	<bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
 		<property name="classesToBeBound">
 			<list>
-				<value>mom.config.api.Simulation</value>
+				<value>mom.config.api.generated.Simulation</value>
 			</list>
 		</property>
 		<property name="schema" value="classpath:SimulationSchema.xsd" />

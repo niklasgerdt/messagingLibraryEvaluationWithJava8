@@ -1,13 +1,11 @@
-package mom.simulation;
+package mom.config.simulation;
 
 import java.util.Set;
 import lombok.NonNull;
-import mom.config.ActiveListenerConfiguration;
-import mom.config.ActiveSimulatorConfiguration;
-import mom.config.ListenerConfiguration;
-import mom.config.SimulationConfiguration;
-import mom.config.SimulatorConfiguration;
-import mom.config.XmlApiReader;
+import mom.config.api.XmlApiReader;
+import mom.simulation.Listener;
+import mom.simulation.Simulation;
+import mom.simulation.Simulator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

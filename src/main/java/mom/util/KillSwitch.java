@@ -2,7 +2,7 @@ package mom.util;
 
 import java.io.IOException;
 import mom.event.Event;
-import mom.publisher.Publisher;
+import mom.simulation.sut.Publisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

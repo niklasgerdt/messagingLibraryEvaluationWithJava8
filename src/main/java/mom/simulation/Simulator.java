@@ -3,7 +3,7 @@ package mom.simulation;
 import java.util.stream.Stream;
 import lombok.NonNull;
 import mom.event.EventSource;
-import mom.publisher.Publisher;
+import mom.simulation.sut.Publisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

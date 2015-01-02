@@ -1,7 +1,9 @@
-package mom.simulation;
+package mom.config.simulation;
 
 import java.util.HashSet;
 import java.util.Set;
+import mom.simulation.Listener;
+import mom.simulation.Simulator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;

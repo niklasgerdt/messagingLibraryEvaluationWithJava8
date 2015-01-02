@@ -1,10 +1,9 @@
-package mom.subscriber;
+package mom.simulation.sut.jeromq;
 
 import java.util.Optional;
 import javax.annotation.PostConstruct;
 import mom.event.Event;
-import mom.net.NetworkContext;
-import mom.net.Socket;
+import mom.simulation.sut.Subscriber;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

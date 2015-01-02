@@ -1,4 +1,4 @@
-package mom.net;
+package mom.simulation.sut.jeromq;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.zeromq.ZMQ;
 
 @Component
-@Profile({ "zero", "default" })
+@Profile({ "jero", "zero", "default" })
 public class NetworkContext {
     private static final int ZMQ_THREADS = 1;
     private ZMQ.Context ctx;

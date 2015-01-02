@@ -1,4 +1,4 @@
-package mom.subscriber;
+package mom.simulation.sut;
 
 import java.util.Optional;
 import mom.event.Event;

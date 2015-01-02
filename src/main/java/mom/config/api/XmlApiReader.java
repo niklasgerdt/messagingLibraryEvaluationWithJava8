@@ -1,12 +1,16 @@
-package mom.config;
+package mom.config.api;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import javax.xml.transform.stream.StreamSource;
 import lombok.NonNull;
-import mom.config.api.Simulation;
-import mom.config.api.Simulation.Listeners.Listener;
-import mom.config.api.Simulation.Simulators.Simulator;
+import mom.config.api.generated.Simulation;
+import mom.config.api.generated.Simulation.Listeners.Listener;
+import mom.config.api.generated.Simulation.Simulators.Simulator;
+import mom.config.simulation.ListenerConfiguration;
+import mom.config.simulation.SimulationConfiguration;
+import mom.config.simulation.SimulationConfigurationFactory;
+import mom.config.simulation.SimulatorConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.oxm.Unmarshaller;
 import org.springframework.stereotype.Component;

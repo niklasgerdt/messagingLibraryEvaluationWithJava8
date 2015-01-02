@@ -1,10 +1,9 @@
-package mom.dao;
+package mom.event;
 
 import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.sql.DataSource;
-import mom.event.Event;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,18 +63,18 @@ public class EventDao {
         return dev;
     }
 
-    public Double getRoutingMinTime(final int from, final int to) {
+    public Long getRoutingMinTime(final int from, final int to) {
         SqlParameterSource params = new MapSqlParameterSource().addValue("from", from).addValue("to", to);
         String sql = "select min(routed-created) from events where id > :from and id <= :to";
-        Double min = jdbc.queryForObject(sql, params, Double.class);
+        Long min = jdbc.queryForObject(sql, params, Long.class);
         logger.debug("min routing time is {}", min);
         return min;
     }
 
-    public Double getRoutingMaxTime(final int from, final int to) {
+    public Long getRoutingMaxTime(final int from, final int to) {
         SqlParameterSource params = new MapSqlParameterSource().addValue("from", from).addValue("to", to);
         String sql = "select max(routed-created) from events where id > :from and id <= :to";
-        Double max = jdbc.queryForObject(sql, params, Double.class);
+        Long max = jdbc.queryForObject(sql, params, Long.class);
         logger.debug("max routing time is {}", max);
         return max;
     }

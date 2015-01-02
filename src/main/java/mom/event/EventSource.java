@@ -4,7 +4,7 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.function.Supplier;
 import javax.annotation.PostConstruct;
-import mom.config.ActiveSimulatorConfiguration;
+import mom.config.simulation.ActiveSimulatorConfiguration;
 import mom.util.Pauser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

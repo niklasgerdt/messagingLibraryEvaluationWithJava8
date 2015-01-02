@@ -1,4 +1,4 @@
-package mom.config;
+package mom.config.simulation;
 
 import java.util.ArrayList;
 import java.util.List;

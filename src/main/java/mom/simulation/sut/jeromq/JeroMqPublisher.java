@@ -1,10 +1,8 @@
-package mom.publisher;
+package mom.simulation.sut.jeromq;
 
 import javax.annotation.PostConstruct;
 import mom.event.Event;
-import mom.net.NetworkContext;
-import mom.net.OutputAddressFactory;
-import mom.net.Socket;
+import mom.simulation.sut.Publisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

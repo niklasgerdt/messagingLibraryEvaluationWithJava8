@@ -1,4 +1,4 @@
-package mom.config;
+package mom.config.simulation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;

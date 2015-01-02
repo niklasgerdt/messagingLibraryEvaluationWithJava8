@@ -3,7 +3,7 @@ package mom.simulation;
 import java.util.Optional;
 import mom.event.Event;
 import mom.event.EventSource;
-import mom.publisher.Publisher;
+import mom.simulation.sut.Publisher;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

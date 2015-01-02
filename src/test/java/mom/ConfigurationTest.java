@@ -2,8 +2,8 @@ package mom;
 
 import static org.junit.Assert.assertTrue;
 import mom.config.Config;
+import mom.config.simulation.SimulationConfigurer;
 import mom.simulation.Simulation;
-import mom.simulation.SimulationConfigurer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

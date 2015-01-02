@@ -1,4 +1,4 @@
-package mom.net;
+package mom.simulation.sut.jeromq;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import org.springframework.beans.factory.annotation.Autowired;

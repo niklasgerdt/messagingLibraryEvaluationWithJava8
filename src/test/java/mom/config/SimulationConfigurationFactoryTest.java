@@ -2,6 +2,9 @@ package mom.config;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import mom.config.simulation.SimulationConfiguration;
+import mom.config.simulation.SimulationConfigurationFactory;
+import mom.config.simulation.SimulatorConfiguration;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

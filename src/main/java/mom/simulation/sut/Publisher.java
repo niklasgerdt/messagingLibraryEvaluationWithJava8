@@ -1,4 +1,4 @@
-package mom.publisher;
+package mom.simulation.sut;
 
 import mom.event.Event;
 

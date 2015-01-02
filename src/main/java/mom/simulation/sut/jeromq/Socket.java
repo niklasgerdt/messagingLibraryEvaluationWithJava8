@@ -1,4 +1,4 @@
-package mom.net;
+package mom.simulation.sut.jeromq;
 
 import org.zeromq.ZMQ;
 

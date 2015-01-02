@@ -1,4 +1,4 @@
-package mom.config;
+package mom.config.simulation;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -8,7 +8,9 @@ import org.springframework.stereotype.Component;
 @Component
 @Scope("prototype")
 @Data
-@Qualifier("listenerConfiguration")
-public class ListenerConfiguration {
-    private int id;
+@Qualifier("simulatorConfiguration")
+public class SimulatorConfiguration {
+    private int eventContentLength;
+    private int pauseBetweenEvents;
+    private int simulatorId;
 }
