@@ -2,6 +2,8 @@ package mom.config;
 
 import javax.sql.DataSource;
 import mom.config.simulation.SimulationBeans;
+import mom.simulation.sut.jeromq.NetworkContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,7 +19,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 @ComponentScan(basePackages = "mom")
 @ImportResource("classpath:XmlApiContext.xml")
 @PropertySource("classpath:/jdbc.properties")
-public class Config {
+public class SimulationBaseConfig {
     @Value("${jdbc.driverClassName}")
     private String driverClassName;
     @Value("${jdbc.url}")
@@ -26,6 +28,8 @@ public class Config {
     private String jdbcUser;
     @Value("${jdbc.password}")
     private String jdbcPassword;
+    @Autowired
+    private NetworkContext context;
 
     @Bean
     public DataSource dataSource() {
@@ -40,5 +44,9 @@ public class Config {
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
+    }
+
+    public void destroy() {
+        context.term();
     }
 }

@@ -1,6 +1,6 @@
 package mom.main;
 
-import mom.config.Config;
+import mom.config.SimulationBaseConfig;
 import mom.config.simulation.SimulationConfigurer;
 import mom.simulation.Simulation;
 import mom.util.Logging;
@@ -17,8 +17,7 @@ public class SimulationRunner {
         Logging.logbackStatus();
         logger.info("starting simulation");
 
-        @SuppressWarnings("resource")
-        ApplicationContext ctx = new AnnotationConfigApplicationContext(Config.class);
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(SimulationBaseConfig.class);
         ((AbstractApplicationContext) ctx).registerShutdownHook();
 
         SimulationConfigurer config = ctx.getBean(SimulationConfigurer.class);
@@ -26,6 +25,7 @@ public class SimulationRunner {
         simulation.run();
 
         logger.info("ending simulation");
+        ((AbstractApplicationContext) ctx).close();
         Logging.stopLogging();
     }
 }

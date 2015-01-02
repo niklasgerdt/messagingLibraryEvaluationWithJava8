@@ -11,7 +11,6 @@ import mom.simulation.sut.Subscriber;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
@@ -25,22 +24,20 @@ public class Listener implements Runnable {
     private final static Logger logger = LoggerFactory.getLogger(Listener.class);
     private final Subscriber subscriber;
     private final EventDao eventDao;
-    private final int eventLimit;
     private final EndSimulation ending;
     private Set<Event> events;
     private final int id;
 
     @Autowired
     public Listener(@NonNull final Subscriber subscriber, @NonNull final EventDao eventDao,
-            @Value("${eventlimit}") final int eventLimit,
             @NonNull final ActiveListenerConfiguration listenerConfiguration, @NonNull final EndSimulation endSimulation) {
         this.subscriber = subscriber;
         this.eventDao = eventDao;
-        this.eventLimit = eventLimit;
         this.id = listenerConfiguration.getId();
         ending = endSimulation;
-        events = new HashSet<>(eventLimit);
-        logger.info("initialised listener sub {}, dao {}, limit {}, id {}", subscriber, eventDao, eventLimit, id);
+        ending.activateListener();
+        events = new HashSet<>(10_000_000);
+        logger.info("initialised listener sub {}, dao {}, limit {}, id {}", subscriber, eventDao, id);
     }
 
     @Override
@@ -53,11 +50,14 @@ public class Listener implements Runnable {
                 logger.debug("received.event {}", ev);
                 events.add(ev);
             });
-            if (!e.isPresent() && ending.isEnded()) {
-                logger.debug("ending listener, no more events");
+            if (!e.isPresent() && ending.isSimulationsEnded()) {
+                logger.info("ending listener, no more events");
                 break;
             }
         }
+        logger.info("writing events {} to db ", events.size());
         eventDao.insertAll(events);
+        logger.info("writed events {} to db ", events.size());
+        ending.deActivateListener();
     }
 }

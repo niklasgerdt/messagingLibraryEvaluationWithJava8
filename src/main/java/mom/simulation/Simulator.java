@@ -31,11 +31,12 @@ public class Simulator implements Runnable {
         this.publisher = publisher;
         this.limit = limit;
         this.ending = endSimulation;
+        ending.activateSimulator();
     }
 
     public void simulate() {
-        Stream.generate(source).limit(limit).filter(e -> !ending.isEnded()).peek(e -> logger.debug("sending.event {}", e)).forEach(e -> publisher.pub(e.get()));
-        ending.setEnded(true);
+        Stream.generate(source).limit(limit).peek(e -> logger.debug("sending.event {}", e)).forEach(e -> publisher.pub(e.get()));
+        ending.deActivateSimulator();
     }
 
     @Override

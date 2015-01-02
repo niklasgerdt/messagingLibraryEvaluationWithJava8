@@ -3,6 +3,7 @@ package mom.simulation.sut.jeromq;
 import org.zeromq.ZMQ;
 
 public class Socket {
+    private static final int DEF_TO = 10000;
     private final ZMQ.Socket socket;
 
     Socket(ZMQ.Socket socket) {
@@ -11,7 +12,7 @@ public class Socket {
 
     public void bind(String address) {
         socket.bind(address);
-        setSendTimeOut();
+        setSendTimeOut(DEF_TO);
     }
 
     public void send(String notification) {
@@ -28,7 +29,7 @@ public class Socket {
 
     public void connect(String address) {
         socket.connect(address);
-        setReceiveTimeOut();
+        setReceiveTimeOut(DEF_TO);
     }
 
     public String recvStr() {
@@ -39,11 +40,11 @@ public class Socket {
         socket.subscribe(bytes);
     }
 
-    public void setReceiveTimeOut() {
-        socket.setReceiveTimeOut(1000);
+    public void setReceiveTimeOut(int time) {
+        socket.setReceiveTimeOut(time);
     }
 
-    public void setSendTimeOut() {
-        socket.setSendTimeOut(1000);
+    public void setSendTimeOut(int time) {
+        socket.setSendTimeOut(time);
     }
 }
