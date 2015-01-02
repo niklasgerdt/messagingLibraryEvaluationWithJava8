@@ -1,7 +1,6 @@
 package mom.publisher;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import mom.event.Event;
 import mom.net.NetworkContext;
 import mom.net.OutputAddressFactory;
@@ -46,11 +45,5 @@ public class JeroMqPublisher implements Publisher {
         socket = ctx.socket(ZMQ.PUB);
         socket.bind(address);
         logger.info("binded publisher {}", address);
-    }
-
-    @PreDestroy
-    public void destroy() throws Exception {
-        logger.info("destroying publisher");
-        socket.close();
     }
 }

@@ -1,6 +1,7 @@
 package mom.simulation;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import lombok.NonNull;
 import mom.config.ActiveListenerConfiguration;
@@ -44,12 +45,18 @@ public class Listener implements Runnable {
 
     @Override
     public void run() {
-        while (!ending.isEnded()) {
-            Event e = subscriber.receive();
-            logger.debug("received.event {}", e);
-            events.add(e);
-            if (events.size() == eventLimit)
-                eventDao.insertAll(events);
+        while (true) {
+            Optional<Event> e = subscriber.receive();
+            e.ifPresent(ev ->
+            {
+                ev.setNanoReceived(System.nanoTime());
+                logger.debug("received.event {}", ev);
+                events.add(ev);
+            });
+            if (!e.isPresent() && ending.isEnded()) {
+                logger.debug("ending listener, no more events");
+                break;
+            }
         }
         eventDao.insertAll(events);
     }

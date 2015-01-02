@@ -1,6 +1,8 @@
 package mom.event;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @ToString
 public class Event {
@@ -13,7 +15,8 @@ public class Event {
     @Getter
     private final long nanoCreated;
     @Getter
-    private final long nanoReceived;
+    @Setter
+    private long nanoReceived;
     @Getter
     private final String content;
 

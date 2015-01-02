@@ -1,7 +1,7 @@
 package mom.subscriber;
 
+import java.util.Optional;
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import mom.event.Event;
 import mom.net.NetworkContext;
 import mom.net.Socket;
@@ -38,10 +38,17 @@ public class JeroMqSubscriber implements Subscriber {
     }
 
     @Override
-    public Event receive() {
+    public Optional<Event> receive() {
+        logger.trace("receiving raw event");
         String raw = socket.recvStr();
-        Event e = gson.fromJson(raw, Event.class);
-        return e;
+        logger.trace("received raw event {}", raw);
+        if (raw == null) {
+            return Optional.empty();
+        } else {
+            Event e = gson.fromJson(raw, Event.class);
+            logger.trace("converted raw event to object {}", e);
+            return Optional.of(e);
+        }
     }
 
     @PostConstruct
@@ -51,10 +58,5 @@ public class JeroMqSubscriber implements Subscriber {
         socket.connect(address);
         socket.subscribe("".getBytes());
         logger.info("connected {}", address);
-    }
-
-    @PreDestroy
-    public void destroy() {
-        socket.close();
     }
 }

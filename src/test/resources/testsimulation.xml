@@ -7,8 +7,8 @@
 	<p:simulators>
 		<p:simulator>
 			<p:id>1</p:id>
-			<p:event-content-length>1000</p:event-content-length>
-			<p:pause-between-events>1000</p:pause-between-events>
+			<p:event-content-length>10</p:event-content-length>
+			<p:pause-between-events>100</p:pause-between-events>
 		</p:simulator>
 	</p:simulators>
 	<p:listeners>

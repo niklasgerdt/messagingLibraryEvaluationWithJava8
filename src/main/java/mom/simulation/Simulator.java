@@ -35,6 +35,7 @@ public class Simulator implements Runnable {
 
     public void simulate() {
         Stream.generate(source).limit(limit).filter(e -> !ending.isEnded()).peek(e -> logger.debug("sending.event {}", e)).forEach(e -> publisher.pub(e.get()));
+        ending.setEnded(true);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package mom.net;
 
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import org.springframework.context.annotation.Profile;
@@ -11,13 +13,18 @@ import org.zeromq.ZMQ;
 public class NetworkContext {
     private static final int ZMQ_THREADS = 1;
     private ZMQ.Context ctx;
+    private final List<Socket> sockets = new CopyOnWriteArrayList<>();
 
     public Socket socket(int socketType) {
         switch (socketType) {
         case ZMQ.PUB:
-            return new Socket(ctx.socket(socketType));
+            Socket pub = new Socket(ctx.socket(socketType));
+            sockets.add(pub);
+            return pub;
         case ZMQ.SUB:
-            return new Socket(ctx.socket(socketType));
+            Socket sub = new Socket(ctx.socket(socketType));
+            sockets.add(sub);
+            return sub;
         default:
             throw new IllegalArgumentException();
         }
@@ -30,6 +37,7 @@ public class NetworkContext {
 
     @PreDestroy
     private void term() {
-        ctx.term();
+        sockets.forEach(s -> s.close());
+        ctx.close();
     }
 }
