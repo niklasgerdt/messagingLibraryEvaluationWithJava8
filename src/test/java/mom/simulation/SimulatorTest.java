@@ -4,7 +4,6 @@ import java.util.Optional;
 import mom.event.Event;
 import mom.event.EventSource;
 import mom.publisher.Publisher;
-import mom.simulation.Simulator;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -18,13 +17,15 @@ public class SimulatorTest {
     private Publisher pub;
     @Mock
     private Event e;
+    @Mock
+    private EndSimulation end;
     private int limit = 3;
     private Simulator sim;
 
     @Before
     public void setupMocks() {
         MockitoAnnotations.initMocks(this);
-        sim = new Simulator(src, pub, limit, null);
+        sim = new Simulator(src, pub, limit, end);
     }
 
     @SuppressWarnings("unchecked")
