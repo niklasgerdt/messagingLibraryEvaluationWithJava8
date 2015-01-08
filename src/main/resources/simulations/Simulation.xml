@@ -3,12 +3,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.w3schools.com ../SimulationSchema.xsd ">
 
-	<p:system-under-test>test</p:system-under-test>
+	<p:system-under-test>jerotest</p:system-under-test>
 	<p:simulators>
 		<p:simulator>
 			<p:id>0</p:id>
 			<p:event-content-length>100</p:event-content-length>
-			<p:pause-between-events>10000</p:pause-between-events>
+			<p:pause-between-events>1000</p:pause-between-events>
 		</p:simulator>
 	</p:simulators>
 	<p:listeners>

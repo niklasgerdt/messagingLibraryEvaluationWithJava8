@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import org.zeromq.ZMQ;
 
 @Component
-@Profile({ "jero", "default" })
+@Profile({ "zero", "jero", "jerotest", "default" })
 public class NetworkContext {
     final static Logger logger = LoggerFactory.getLogger(NetworkContext.class);
     private static final int ZMQ_THREADS = 1;

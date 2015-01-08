@@ -18,7 +18,7 @@ import com.google.gson.Gson;
 
 @Component
 @Scope("prototype")
-@Profile({ "zero", "default" })
+@Profile({ "zero", "jero", "jerotest", "default" })
 @Lazy
 @PropertySource("classpath:/basic_simulation.properties")
 public class JeroMqSubscriber implements Subscriber {

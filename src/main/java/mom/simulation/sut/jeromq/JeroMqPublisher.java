@@ -15,7 +15,7 @@ import com.google.gson.Gson;
 
 @Component
 @Scope("prototype")
-@Profile({ "zero", "default" })
+@Profile({ "zero", "jero", "jerotest", "default" })
 @Lazy
 public class JeroMqPublisher implements Publisher {
     private final static Logger logger = LoggerFactory.getLogger(JeroMqPublisher.class);

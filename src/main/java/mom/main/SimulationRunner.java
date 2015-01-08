@@ -1,5 +1,6 @@
 package mom.main;
 
+import mom.analysis.Analysator;
 import mom.config.SimulationBaseConfig;
 import mom.config.simulation.SimulationConfigurer;
 import mom.simulation.Simulation;
@@ -17,12 +18,17 @@ public class SimulationRunner {
         Logging.logbackStatus();
         logger.info("starting simulation");
 
+        System.setProperty("spring.profiles.active", args[1]);
         ApplicationContext ctx = new AnnotationConfigApplicationContext(SimulationBaseConfig.class);
         ((AbstractApplicationContext) ctx).registerShutdownHook();
 
         SimulationConfigurer config = ctx.getBean(SimulationConfigurer.class);
         Simulation simulation = config.configure(args[0]);
         simulation.run();
+
+        Analysator analysator = ctx.getBean(Analysator.class);
+        analysator.analyze();
+        analysator.flush();
 
         logger.info("ending simulation");
         ((AbstractApplicationContext) ctx).close();
