@@ -1,52 +1,52 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	targetNamespace="http://www.w3schools.com" xmlns="http://www.w3schools.com"
-	elementFormDefault="qualified">
+  targetNamespace="http://www.w3schools.com" xmlns="http://www.w3schools.com"
+  elementFormDefault="qualified">
 
-	<xs:element name="simulation">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="name" type="xs:string" minOccurs="0"
-					maxOccurs="1" />
-				<xs:element name="system-under-test" type="xs:string"
-					minOccurs="1" maxOccurs="1" />
-				<xs:element name="simulators" minOccurs="1" maxOccurs="1">
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="simulator" minOccurs="1" maxOccurs="1000">
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="id" type="xs:integer" minOccurs="1"
-											maxOccurs="1" />
-										<xs:element name="name" type="xs:string" minOccurs="0"
-											maxOccurs="1" />
-										<xs:element name="event-content-length" type="xs:integer"
-											default="100" minOccurs="1" maxOccurs="1" />
-										<xs:element name="pause-between-events" type="xs:integer"
-											default="10000" minOccurs="1" maxOccurs="1" />
-									</xs:sequence>
-								</xs:complexType>
-							</xs:element>
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="listeners" minOccurs="1" maxOccurs="1">
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="listener" minOccurs="1" maxOccurs="1000">
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="id" type="xs:integer" minOccurs="1"
-											maxOccurs="1" />
-										<xs:element name="name" type="xs:string" minOccurs="0"
-											maxOccurs="1" />
-									</xs:sequence>
-								</xs:complexType>
-							</xs:element>
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+  <xs:element name="simulation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="name" type="xs:string" minOccurs="0"
+          maxOccurs="1" />
+        <xs:element name="system-under-test" type="xs:string"
+          minOccurs="1" maxOccurs="1" />
+        <xs:element name="simulators" minOccurs="1" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="simulator" minOccurs="1" maxOccurs="1000">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="id" type="xs:integer"
+                      minOccurs="1" maxOccurs="1" />
+                    <xs:element name="name" type="xs:string"
+                      minOccurs="0" maxOccurs="1" />
+                    <xs:element name="event-content-length" type="xs:integer"
+                      default="100" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="pause-between-events" type="xs:integer"
+                      default="10000" minOccurs="1" maxOccurs="1" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="listeners" minOccurs="1" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="listener" minOccurs="1" maxOccurs="1000">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="id" type="xs:integer"
+                      minOccurs="1" maxOccurs="1" />
+                    <xs:element name="name" type="xs:string"
+                      minOccurs="0" maxOccurs="1" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

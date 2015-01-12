@@ -1,19 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<p:simulation xmlns:p="http://www.w3schools.com"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.w3schools.com ../SimulationSchema.xsd ">
+<p:simulation xmlns:p="http://www.w3schools.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.w3schools.com ../SimulationSchema.xsd ">
 
-	<p:system-under-test>jerotest</p:system-under-test>
-	<p:simulators>
-		<p:simulator>
-			<p:id>0</p:id>
-			<p:event-content-length>100</p:event-content-length>
-			<p:pause-between-events>1000</p:pause-between-events>
-		</p:simulator>
-	</p:simulators>
-	<p:listeners>
-		<p:listener>
-			<p:id>0</p:id>
-		</p:listener>
-	</p:listeners>
+  <p:system-under-test>jerotest</p:system-under-test>
+  <p:simulators>
+    <p:simulator>
+      <p:id>0</p:id>
+      <p:name>nyse</p:name>
+      <p:event-content-length>100</p:event-content-length>
+      <p:pause-between-events>1000</p:pause-between-events>
+    </p:simulator>
+    <p:simulator>
+      <p:id>1</p:id>
+      <p:name>nasdaq</p:name>
+      <p:event-content-length>100</p:event-content-length>
+      <p:pause-between-events>10000</p:pause-between-events>
+    </p:simulator>
+    <p:simulator>
+      <p:id>3</p:id>
+      <p:name>reuters</p:name>
+      <p:event-content-length>100000</p:event-content-length>
+      <p:pause-between-events>1000000</p:pause-between-events>
+    </p:simulator>
+  </p:simulators>
+  <p:listeners>
+    <p:listener>
+      <p:id>0</p:id>
+    </p:listener>
+    <p:listener>
+      <p:id>1</p:id>
+    </p:listener>
+  </p:listeners>
 </p:simulation>
