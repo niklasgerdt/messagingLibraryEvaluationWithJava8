@@ -3,6 +3,7 @@ package mom.event;
 import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -10,13 +11,18 @@ import org.springframework.stereotype.Component;
 @Component
 @Profile({ "zero", "jero", "jerotest", "default" })
 public class InMemoryEventDao implements EventDao {
+    private static final int SPARE_OVER_LIMIT = 1_000_000;
     final static Logger logger = LoggerFactory.getLogger(InMemoryEventDao.class);
     private Set<Event> events;
+    @Value("${eventlimit}")
+    private int limit;
 
     @Override
     public void insertAll(Set<Event> events) {
         logger.info("caching events");
-        this.events = events;
+        if ((events.size() < limit-SPARE_OVER_LIMIT))
+            throw new RuntimeException("not enough events for analysis");
+        this.events = events; 
     }
 
     @Override

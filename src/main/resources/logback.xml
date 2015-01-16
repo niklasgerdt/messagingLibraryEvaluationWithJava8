@@ -18,8 +18,6 @@
 		<appender-ref ref="FILE" />
 	</logger>
 
-<!-- 	<root level="trace"> -->
-<!-- 	<root level="debug"> -->
 	<root level="info">
 		<appender-ref ref="STDOUT" />
 	</root>

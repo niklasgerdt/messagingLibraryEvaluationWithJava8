@@ -8,7 +8,42 @@
 		<p:simulator>
 			<p:id>0</p:id>
 			<p:event-content-length>100</p:event-content-length>
-			<p:pause-between-events>10000</p:pause-between-events>
+			<p:pause-between-events>100</p:pause-between-events>
+		</p:simulator>
+		<p:simulator>
+			<p:id>1</p:id>
+			<p:event-content-length>100</p:event-content-length>
+			<p:pause-between-events>100</p:pause-between-events>
+		</p:simulator>
+		<p:simulator>
+			<p:id>2</p:id>
+			<p:event-content-length>100</p:event-content-length>
+			<p:pause-between-events>100</p:pause-between-events>
+		</p:simulator>
+		<p:simulator>
+			<p:id>3</p:id>
+			<p:event-content-length>100</p:event-content-length>
+			<p:pause-between-events>100</p:pause-between-events>
+		</p:simulator>
+		<p:simulator>
+			<p:id>4</p:id>
+			<p:event-content-length>100</p:event-content-length>
+			<p:pause-between-events>100</p:pause-between-events>
+		</p:simulator>
+		<p:simulator>
+			<p:id>5</p:id>
+			<p:event-content-length>100</p:event-content-length>
+			<p:pause-between-events>100</p:pause-between-events>
+		</p:simulator>
+		<p:simulator>
+			<p:id>6</p:id>
+			<p:event-content-length>100</p:event-content-length>
+			<p:pause-between-events>100</p:pause-between-events>
+		</p:simulator>
+		<p:simulator>
+			<p:id>7</p:id>
+			<p:event-content-length>100</p:event-content-length>
+			<p:pause-between-events>100</p:pause-between-events>
 		</p:simulator>
 	</p:simulators>
 	<p:listeners>
