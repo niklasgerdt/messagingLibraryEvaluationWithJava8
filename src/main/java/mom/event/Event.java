@@ -11,7 +11,8 @@ public class Event {
     @Getter
     private final int senderId;
     @Getter
-    private final int receiverId;
+    @Setter
+    private int receiverId;
     @Getter
     private final long nanoCreated;
     @Getter

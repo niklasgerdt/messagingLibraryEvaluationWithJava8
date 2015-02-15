@@ -14,4 +14,8 @@ public interface EventDao {
 
     Long getRoutingMaxTime(int from, int to);
 
+    void commonStatistics(int from, int to);
+
+    void listenerStatistics(int from, int to);
+
 }
