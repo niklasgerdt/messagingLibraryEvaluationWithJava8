@@ -46,6 +46,7 @@ public class Listener implements Runnable {
             Optional<Event> e = subscriber.receive();
             e.ifPresent(ev ->
             {
+                logger.debug("received e: {}", ev);
                 ev.setNanoReceived(System.nanoTime());
                 logger.debug("received.event {}", ev);
                 events.add(ev);

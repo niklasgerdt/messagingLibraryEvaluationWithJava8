@@ -1,6 +1,7 @@
 package mom.simulation.sut.jeromq;
 
 import org.zeromq.ZMQ;
+import org.zeromq.ZMsg;
 
 public class Socket {
     private static final int DEF_TO = 10000;
@@ -33,7 +34,12 @@ public class Socket {
     }
 
     public String recvStr() {
-        return socket.recvStr();
+        ZMsg msg = ZMsg.recvMsg(socket);
+        if (msg == null)
+            return null;
+        byte[] bytes = msg.getFirst().getData();
+        return new String(bytes);
+//        return socket.recvStr();
     }
 
     public void subscribe(byte[] bytes) {
