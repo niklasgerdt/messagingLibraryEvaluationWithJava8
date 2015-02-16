@@ -29,6 +29,7 @@ public class Analysator {
 
     @Cacheable("report")
     public Report analyze() {
+        eventDao.commonStatistics(from, to);
         report.setAverageTime(eventDao.getRoutingAverageTime(from, to));
         report.setStandardDeviation(eventDao.getRoutingStandardDeviation(from, to));
         report.setMin(eventDao.getRoutingMinTime(from, to));

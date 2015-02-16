@@ -85,4 +85,15 @@ public class PersistingEventDao implements EventDao {
         logger.info("max routing time is {}", max);
         return max;
     }
+
+    @Override
+    public void commonStatistics(int from, int to) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void listenerStatistics(int from, int to) {
+        // TODO Auto-generated method stub
+        
+    }
 }
